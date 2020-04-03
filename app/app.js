@@ -10,15 +10,16 @@ angular.module('greenPiThumbApp.directives', ['d3']);
 
 greenPiThumbApp.controller('DashboardCtrl', function($scope, $http) {
   $http.get('/temperatureHistory.json').success(function(temperatureHistory) {
-    $scope.temperature = [];
-    // Convert temperature records from C to F.
-    temperatureHistory.forEach(function(record) {
-      $scope.temperature.push({
-        temperature: (record.temperature * (9.0 / 5.0)) + 32.0,
-        timestamp: record.timestamp
-      });
-    });
+    // $scope.temperature = [];
+    // // Convert temperature records from C to F.
+    // temperatureHistory.forEach(function(record) {
+    //   $scope.temperature.push({
+    //     temperature: (record.temperature * (9.0 / 5.0)) + 32.0,
+    //     timestamp: record.timestamp
+    //   });
+    // });
 
+    $scope.temperature = temperatureHistory;
     $scope.latestTemperature =
       $scope.temperature[$scope.temperature.length - 1].temperature;
   });
