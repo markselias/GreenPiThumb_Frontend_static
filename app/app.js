@@ -10,18 +10,14 @@ angular.module('greenPiThumbApp.directives', ['d3']);
 
 greenPiThumbApp.controller('DashboardCtrl', function($scope, $http) {
   $http.get('/temperatureHistory.json').success(function(temperatureHistory) {
-    // $scope.temperature = [];
-    // // Convert temperature records from C to F.
-    // temperatureHistory.forEach(function(record) {
-    //   $scope.temperature.push({
-    //     temperature: (record.temperature * (9.0 / 5.0)) + 32.0,
-    //     timestamp: record.timestamp
-    //   });
-    // });
-
     $scope.temperature = temperatureHistory;
     $scope.latestTemperature =
       $scope.temperature[$scope.temperature.length - 1].temperature;
+  });
+  $http.get('/soilTemperatureHistory.json').success(function(soilTemperatureHistory) {
+    $scope.soilTemperature = soilTemperatureHistory;
+    $scope.latestSoilTemperature =
+      $scope.soilTemperature[$scope.soilTemperature.length - 1].soil_temperature;
   });
   $http.get('/humidityHistory.json').success(function(humidityHistory) {
     $scope.humidity = humidityHistory;
@@ -44,6 +40,16 @@ greenPiThumbApp.controller('DashboardCtrl', function($scope, $http) {
     });
     $scope.latestSoilMoisture =
       $scope.soilMoisture[$scope.soilMoisture.length - 1].moisture;
+  });
+  $http.get('/pumpHistory.json').success(function(pumpHistory) {
+    $scope.pump = pumpHistory;
+    $scope.latestPump =
+      $scope.pump[$scope.pump.length - 1].pump_state;
+  });
+  $http.get('/windowHistory.json').success(function(windowHistory) {
+    $scope.window = windowHistory;
+    $scope.latestwindow =
+      $scope.window[$scope.window.length - 1].window_state;
   });
   $http.get('/images.json').success(function(images) {
     $scope.images = [];

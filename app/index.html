@@ -54,6 +54,18 @@
           <td>Soil Moisture</td>
           <td>{{ latestSoilMoisture | number:1 }}%</td>
         </tr>
+        <tr>
+          <td>Soil Temperature</td>
+          <td>{{ latestSoilTemperature | number:1 }}%</td>
+        </tr>
+        <tr>
+          <td>Pump State</td>
+          <td>{{ latestPump | number:1 }}%</td>
+        </tr>
+        <tr>
+          <td>Window State</td>
+          <td>{{ latestWindow | number:1 }}%</td>
+        </tr>
       </table>
       <div class="row cameraImage" id="camera">
         <a ng-href="{{ images[currentImage].filename }}" target="_blank">
@@ -82,7 +94,7 @@
     </div>
     <div class="row" id="history">
       <h1>History</h1>
-      <h3>Temperature</h3>
+      <h3>Ambient Temperature</h3>
       <line-graph chart-data="temperature" value-property="temperature"></line-graph>
       <h3>Ambient Humidity</h3>
       <line-graph chart-data="humidity" value-property="humidity"></line-graph>
@@ -90,6 +102,12 @@
       <line-graph chart-data="lightLevel" value-property="light"></line-graph>
       <h3>Soil Moisture</h3>
       <line-graph chart-data="soilMoisture" value-property="moisture"></line-graph>
+      <h3>Soil Temperature</h3>
+      <line-graph chart-data="soilTemperature" value-property="temperature"></line-graph>
+      <h3>Pump state</h3>
+      <line-graph chart-data="pump" value-property="pump_state"></line-graph>
+      <h3>Window state</h3>
+      <line-graph chart-data="window" value-property="window_state"></line-graph>
     </div>
     <div class="row" id="about">
       <h1>About</h1>
