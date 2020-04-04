@@ -31,14 +31,13 @@ greenPiThumbApp.controller('DashboardCtrl', function($scope, $http) {
   });
   $http.get('/soilMoistureHistory.json').success(function(moistureHistory) {
     // Convert raw soil moisture readings into a percentage (out of 1023).
-    // $scope.soilMoisture = [];
-    // moistureHistory.forEach(function(record) {
-    //   $scope.soilMoisture.push({
-    //     moisture: (record.soil_moisture / 1023.0) * 100.0,
-    //     timestamp: record.timestamp
-    //   });
-    // });
-    $scope.soilMoisture = moistureHistory
+    $scope.soilMoisture = [];
+    moistureHistory.forEach(function(record) {
+      $scope.soilMoisture.push({
+        moisture: record.soil_moisture,
+        timestamp: record.timestamp
+      });
+    });
     $scope.latestSoilMoisture =
       $scope.soilMoisture[$scope.soilMoisture.length - 1].moisture;
   });
