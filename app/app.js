@@ -14,10 +14,23 @@ greenPiThumbApp.controller('DashboardCtrl', function($scope, $http) {
     $scope.latestTemperature =
       $scope.temperature[$scope.temperature.length - 1].temperature;
   });
+  // $http.get('/soilTemperatureHistory.json').success(function(soilTemperatureHistory) {
+    // $scope.soilTemperature = soilTemperatureHistory;
+    // $scope.latestSoilTemperature =
+    //   $scope.soilTemperature[$scope.soilTemperature.length - 1].soil_temperature;
+
   $http.get('/soilTemperatureHistory.json').success(function(soilTemperatureHistory) {
-    $scope.soilTemperature = soilTemperatureHistory;
-    $scope.latestSoilTemperature =
-      $scope.soilTemperature[$scope.soilTemperature.length - 1].soil_temperature;
+    $scope.soilTemperature = [];
+    // Convert temperature records from C to F.
+    soilTemperatureHistory.forEach(function(record) {
+      $scope.soilTemperature.push({
+        temperature: (record.temperature * (9.0 / 5.0)) + 32.0,
+        timestamp: record.timestamp
+      });
+    });
+
+    $scope.latestTemperature =
+      $scope.temperature[$scope.temperature.length - 1].temperature;
   });
   $http.get('/humidityHistory.json').success(function(humidityHistory) {
     $scope.humidity = humidityHistory;
