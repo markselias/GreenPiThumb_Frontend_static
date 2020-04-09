@@ -13,11 +13,15 @@ greenPiThumbApp.controller('DashboardCtrl', function($scope, $http) {
     $scope.temperature = temperatureHistory;
     $scope.latestTemperature =
       $scope.temperature[$scope.temperature.length - 1].temperature;
+    $scope.dailyMaxTemperature =
+      Math.max(...$scope.temperature.slice($scope.temperature.length - 95, $scope.temperature.length));
   });
   $http.get('/soilTemperatureHistory.json').success(function(soilTemperatureHistory) {
     $scope.soilTemperature = soilTemperatureHistory;
     $scope.latestSoilTemperature =
       $scope.soilTemperature[$scope.soilTemperature.length - 1].soil_temperature;
+    $scope.dailySoilTemperature =
+      Math.max(...$scope.soilTemperature.slice($scope.soilTemperature.length - 95, $scope.soilTemperature.length));
   });
   $http.get('/humidityHistory.json').success(function(humidityHistory) {
     $scope.humidity = humidityHistory;
